@@ -1,0 +1,61 @@
+
+    <div class="container" id="startPage">
+      <nav>
+        <p class="header">TIC / TAC / TOE</p>
+      </nav>
+      <!-- the action will adjust the URL... Saving for later -->
+        <div class="mainBody">
+          <div class="formContain">
+            <div class="txtInptCenter">
+              <input class="txtInpt frontPageText" id="p1" type="text" value="PLAYER 1"/>
+              <input class="txtInpt frontPageText" id="p2" type="text" value="PLAYER 2"/>
+              
+              <!-- <input class="strBtn" type="submit" value="START"> -->
+            </div>
+            <p class="startText">X's or O's?</p>
+            <div class="strBtnContain">
+              <button class="strBtn frontPageText" ng-click="choose(1)"> X'S</button>
+            </div>
+            <div class="or">
+              OR
+            </div>
+            <div class="strBtnContain">
+              <button class="strBtn frontPageText" ng-click="choose(2)"> 0'S</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div id="game">
+      <nav>
+            <button class="menuItem" ng-click="abcd()">
+              RESET
+            </button>
+            <button class="menuItem" onclick="home()">
+              HOME
+            </button>
+            
+            <!-- <button class="menuItem">
+              <p>Other stuff</p>
+            </button> -->
+        </nav>
+        <div class="alertBox" >
+            <div class="alert">
+                <div class="alertText">
+                  WINNER
+                </div>
+            </div>
+          </div>
+      <div>
+        <div id="GameContainer" ng-click="">
+          <div ng-repeat="row in ticTacToe">
+            <div class="boardClear"ng-class="{sqr:true, borderTop:$parent.$index !=0, borderLeft:$index !=0}" ng-repeat="cell in row " ng-click="clickSqr($parent.$index, $index); check($parent.$index, $index)">{{ticTacToe[$parent.$index][$index]}}</div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        
+      </div>
+      <div class="indiContain">
+            <div class="indicate" id="x"></div>
+            <div class="indicate" id="o">TURN</div>
+        </div>
+      </div>
