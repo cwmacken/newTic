@@ -34,7 +34,7 @@ angular.module('newTicApp')
 	      	document.getElementById('game').style.display="none";
 	      	document.getElementById('startPage').style.display="inline";	
 		}
-		$scope.theResetBtn= function(){
+		$scope.theResetBtn=function(){
         	document.getElementsByClassName('alertBox')[0].style.display = "none";
         	document.getElementById('o').innerHTML = "TURN";
         	document.getElementById('x').innerHTML = p1Name+'\'S';
@@ -81,12 +81,12 @@ angular.module('newTicApp')
 		if($scope.ticTacToe[row][column]!='X' && $scope.ticTacToe[row][column]!='O'){
 				if(turn % 2 == 1) {
 					$scope.ticTacToe[row][column]='X';
-					document.getElementsByClassName('alertText')[0].innerHTML = p2Name+" WINS!!!";
+					document.getElementById('x').innerHTML = p2Name+"'S";
 					
 				}
 				else{
 					$scope.ticTacToe[row][column]='O';
-					document.getElementsByClassName('alertText')[0].innerHTML = p1Name+" WINS!!!";
+					document.getElementById('x').innerHTML = p1Name+"'S";
 					
 				}
 				turn++
@@ -129,13 +129,14 @@ console.log(a+" "+b+" "+c+" "+d+" "+e+" "+f+" "+g+" "+h+" "+i);
 			(c=="X" && e=="X" && g=='X')
 		)	
 			{
+				document.getElementsByClassName('alertText')[0].innerHTML = p1Name+" WINS!!!";
 				console.log($scope.ticTacToe);
 		  		document.getElementById('x').innerHTML = "";
 	  			document.getElementById('o').innerHTML = "";
 	  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
-	  			document.getElementsByClassName('alertText')[0].innerHTML = p1Name+" WINS!!!";
+	  			
 	  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
-	  			// setTimeout("reset();",3000);
+	  			setTimeout("$scope.theResetBtn()",3000);
 		  	}
 		 else if(
 			(a=="O" && b=="O" && c=='O') 
@@ -155,37 +156,44 @@ console.log(a+" "+b+" "+c+" "+d+" "+e+" "+f+" "+g+" "+h+" "+i);
 			(c=="O" && e=="O" && g=='O')
 		)
 			{
+				document.getElementsByClassName('alertText')[0].innerHTML = p2Name+" WINS!!!";
 				console.log("O win - " + $scope.ticTacToe);
 		  		document.getElementById('x').innerHTML = "";
 	  			document.getElementById('o').innerHTML = "";
 	  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
-	  			document.getElementsByClassName('alertText')[0].innerHTML = p2Name+" WINS!!!";
+	  			
 	  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
-	  			// setTimeout("reset();",3000);
-		  		
+	  			setTimeout("theResetBtn();",3000);
+// 		  		var enableSubmit = function(ele) {
+//     $(ele).removeAttr("disabled");
+// }
+
+// $("#submit").click(function() {
+//     var that = this;
+//     $(this).attr("disabled", true);
+//     setTimeout(function() { enableSubmit(that) }, 1000);
+// });
 		  	}
 		 else{
 		 	if(turn==10 && drawFix==1){
-		 		alert('DRAW.....')
+		 		
 		 		document.getElementById('x').innerHTML = "";
 	  			document.getElementById('o').innerHTML = "";
 	  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
 	  			document.getElementsByClassName('alertText')[0].innerHTML = "DRAW...";
-	  			// setTimeout("reset();",3000);
+	  			setTimeout("theResetBtn();",3000);
 	  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
 		 	}
-		 	else if(turn==11 && drawFix==2){
-		 		alert('DRAW.....')
+		 	else if(turn==10 && drawFix==2){
+		 		
 		 		document.getElementById('x').innerHTML = "";
 	  			document.getElementById('o').innerHTML = "";
 	  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
 	  			document.getElementsByClassName('alertText')[0].innerHTML = "DRAW...";
-	  			// setTimeout("reset();",3000);
+	  			setTimeout("theResetBtn();",3000);
 	  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
 		 	}
 
 		 }
 		}
-		
 	});
-
