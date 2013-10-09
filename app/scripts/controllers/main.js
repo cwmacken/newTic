@@ -5,9 +5,10 @@ var turn=1
 
 
 angular.module('newTicApp')
-	.controller('MainCtrl',function($scope){
-		$scope.p1Pick = "X";
-		$scope.p2Pick = "O";
+	.controller('MainCtrl',function($scope, angularFire){
+		// $scope.p1Pick = "X";
+		// $scope.p2Pick = "O";
+		var ref = new Firebase("https://ticcm.firebaseio.com/");
 
 		$scope.choose=function (x){
 		  console.log("choose function working")
@@ -61,10 +62,12 @@ angular.module('newTicApp')
 		  p1Name = p1Hold.toUpperCase();
 		  p2Name = p2Hold.toUpperCase();
 		  return p1Name, p2Name;
+		  $scope.ticTacToe= [['','',''],['','',''],['','','']];
 		}
 
-		$scope.ticTacToe= [['','',''],['','',''],['','','']];
+		
 		console.log($scope.ticTacToe);
+		angularFire(ref, $scope, "ticTacToe");
 
  //     $scope.resetBoard = function(){
 	// 	// Simply clear out each cell in the array
@@ -184,7 +187,7 @@ console.log(a+" "+b+" "+c+" "+d+" "+e+" "+f+" "+g+" "+h+" "+i);
 	  			setTimeout("theResetBtn();",3000);
 	  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
 		 	}
-		 	else if(turn==10 && drawFix==2){
+		 	else if(turn==11 && drawFix==2){
 		 		
 		 		document.getElementById('x').innerHTML = "";
 	  			document.getElementById('o').innerHTML = "";
