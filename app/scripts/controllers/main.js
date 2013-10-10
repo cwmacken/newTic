@@ -10,12 +10,19 @@ angular.module('newTicApp')
 		// $scope.p2Pick = "O";
 		var ref = new Firebase("https://ticcm.firebaseio.com/");
 
-		$scope.choose=function (x){
-		  console.log("choose function working")
-		  turn = x;
-		  drawFix=x;
+		// $scope.clearBoard= function()={
+		// 	$scope.ticTacToe= [['','',''],['','',''],['','','']];
 
-		  if (x==2){
+		// }
+
+		$scope.choose=function (f){
+		  console.log("choose function working")
+		  console.log(f)
+		  turn = 1;
+		  drawFix=f;
+		  choice = f;
+
+		  if (f==2){
 		  	$scope.p1Pick ="O"
 		  	$scope.p2Pick ="X"
 		  }
@@ -26,6 +33,7 @@ angular.module('newTicApp')
 		  }
 		  
 		  $scope.strGame();
+		  
 
 		};
 
@@ -33,7 +41,9 @@ angular.module('newTicApp')
 			console.log('in fucntion')
 	      	document.getElementsByClassName('alertBox')[0].style.display = "none";
 	      	document.getElementById('game').style.display="none";
-	      	document.getElementById('startPage').style.display="inline";	
+	      	document.getElementById('startPage').style.display="inline";
+	      	$scope.ticTacToe= [['','',''],['','',''],['','','']];
+	      		
 		}
 		$scope.theResetBtn=function(){
         	document.getElementsByClassName('alertBox')[0].style.display = "none";
@@ -45,8 +55,28 @@ angular.module('newTicApp')
         	// 		$scope.ticTacToe[row][column] ='';
         	// 	}
        		// }
-       		turn=1;
+       		turn=choice;
        		console.log($scope.ticTacToe);
+       		console.log(choice);
+       		console.log(turn)
+
+       			choose=function (choice){
+		  		console.log("choose function working")
+		  		drawFix=choice;
+		  		turn=1;
+
+		  		if (choice==2){
+		  		$scope.p1Pick ="O"
+		  		$scope.p2Pick ="X"
+		  		}
+
+		  		else{
+		  		$scope.p1Pick ="X";
+				$scope.p2Pick ="O";
+		  		}
+		  
+
+			};
      	};
 
 		// $scope.transformCell=function(c){
@@ -54,6 +84,7 @@ angular.module('newTicApp')
 		// };
 
 		$scope.strGame=function(){
+			console.log("in start btn")	
 		  document.getElementById('game').style.display="inline";
 		  document.getElementById('startPage').style.display="none";
 		  var p1Hold = document.getElementById('p1').value;
@@ -85,12 +116,13 @@ angular.module('newTicApp')
 				if(turn % 2 == 1) {
 					$scope.ticTacToe[row][column]='X';
 					document.getElementById('x').innerHTML = p2Name+"'S";
+					console.log(turn)
 					
 				}
 				else{
 					$scope.ticTacToe[row][column]='O';
 					document.getElementById('x').innerHTML = p1Name+"'S";
-					
+					console.log(turn)
 				}
 				turn++
 			}
