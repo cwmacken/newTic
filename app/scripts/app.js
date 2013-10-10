@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('newTicApp', ['firebase'])
+angular.module('newTicApp', ['firebase', 'ngCookies'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

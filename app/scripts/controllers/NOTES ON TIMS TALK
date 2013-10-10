@@ -1,0 +1,47 @@
+NOTES ON TIMS TALK 
+
+//bidnding to firebase
+$scope.games =[];
+$scope.queue = {};
+
+$scope.player = ""
+$scope.gameId = -1
+
+var games = new Firebase(<the https of your firebase>game);
+angularFire(queue, $scope "games"),then(function(){
+	var queue = new Firebase(<the https of your firebase>queue);
+angularFire(queue, $scope "queue"),then(function(){
+	if ($scope.queue.gameID == undefined){
+		console.log("I'm player 1");
+		$scope.player ="p1";
+		//create game
+		nar newGmae = {
+			board: ["","",""],
+			turn: 'p1',
+			win: 'false',
+			turnCount:0
+		};
+
+		$scope.games.push(newGame) -1;
+
+		$scope.queue.gameId = scope.gameId;
+	}
+	else
+	{
+		console.log("I'm player 2");
+		$scope.player="p2";
+
+		$scope.gameId = $scope.queue.gameId;
+		$scope.aueue = {};
+		console.log(""Player 2's gam is "+scopegamId)):
+	}
+
+
+
+}
+
+// binding to angular template
+$scope.hello = function () {
+		$scope.games[$scope.gameId]
+}
+});

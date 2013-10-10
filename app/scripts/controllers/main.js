@@ -1,11 +1,28 @@
+
+// Default loading varibles
 var p1Name = 'Player 1';
 var p2Name = 'PLayer 2';
 var turn=1
 
+// // user identifcation---Cookie
+// function idUser(){
+// 	console.log('iding user')
+// 	// var date=getDate();
+	
+// 	// var exDate=setDate(date+7);
+
+// 	var playerNumber= Math.random();
+
+// 	// var cookieValue=escape(playerNumber) + ((exdays==null) ? "" : "; expires"+exdate.toUTCString());
+// 	document.cookie=playerNumber;
+// 	console.log(playerNumber);
+// }
 
 
+
+// $scope JS
 angular.module('newTicApp')
-	.controller('MainCtrl',function($scope, angularFire){
+	.controller('MainCtrl',function($scope, angularFire,$cookies){
 		// $scope.p1Pick = "X";
 		// $scope.p2Pick = "O";
 		var ref = new Firebase("https://ticcm.firebaseio.com/");
@@ -14,6 +31,7 @@ angular.module('newTicApp')
 		// 	$scope.ticTacToe= [['','',''],['','',''],['','','']];
 
 		// }
+		// $cookies.playerId=Math.random()
 
 		$scope.choose=function (f){
 		  console.log("choose function working")
@@ -31,11 +49,13 @@ angular.module('newTicApp')
 		  	$scope.p1Pick ="X";
 			$scope.p2Pick ="O";
 		  }
-		  
+		  $scope.playerId=Math.random()
+		  console.log($scope.playerId)
 		  $scope.strGame();
 		  
 
 		};
+		// $scope
 
 		$scope.home=function(){
 			console.log('in fucntion')
