@@ -48,7 +48,6 @@ angular.module('newTicApp')
 
 		$scope.choose=function (f){
 		  turn = 1;
-		  choice = f;
 		  $scope.strGame();
 		};
 
