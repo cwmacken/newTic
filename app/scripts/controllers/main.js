@@ -9,27 +9,26 @@ angular.module('newTicApp')
 	.controller('MainCtrl',function ($scope, angularFire){
     
     // binding these to firebase
-    $scope.games = [];
+    $scope.game = [];
     $scope.queue = {};
-    
 
-		var games = new Firebase("https://ticcm.firebaseio.com/games");
-    angularFire(games, $scope, "games").then(function () {
+		var game = new Firebase("https://ticcm.firebaseio.com/game");
+    angularFire(game, $scope, "game").then(function () {
       
       var queue = new Firebase("https://ticcm.firebaseio.com/queue");
-      angularFire(games, $scope, "queue").then(function (){
+      angularFire(queue, $scope, "queue").then(function (){
         if ($scope.queue.gameId == undefined) {
           console.log("I'm player 1");
           $scope.player = "p1";
 
           var newGame = {
-             board: $scope.ticTacToe= [['','',''],['','',''],['','','']],
-            turn: 'p1',
-            win: false,
-            turnCount: 0
+            ticTacToe: [['','',''],['','',''],['','','']],
+            turn: 'p1'
+            // win: false,
+            // turnCount: 0
           };      
 
-          $scope.gameId = $scope.games.push(newGame) - 1;
+          $scope.gameId = $scope.game.push(newGame) - 1;
           $scope.queue.gameId = $scope.gameId;
           console.log("Player 1's game is: " + $scope.gameId);
 
@@ -60,46 +59,47 @@ angular.module('newTicApp')
 		  document.getElementById('game').style.display="inline";
 		  document.getElementById('startPage').style.display="none";
 		  var p1Hold = document.getElementById('p1').value;
-		  var p2Hold = document.getElementById('p2').value;
+		  // var p2Hold = document.getElementById('p2').value;
 		  document.getElementById('x').innerHTML = (p1Hold.toUpperCase())+'\'S';
 		  p1Name = p1Hold.toUpperCase();
-		  p2Name = p2Hold.toUpperCase();
-		  return p1Name, p2Name;
-		  $scope.ticTacToe= [['','',''],['','',''],['','','']];
+		  // p2Name = p2Hold.toUpperCase();
+		  return p1Name, 
+      p2Name
+      ;
 		}
 
-		angularFire(games, $scope, "ticTacToe");
-
+		// angularFire(game, $scope, "ticTacToe");
+// game[gameId].ticTacToe
   	$scope.clickSqr = function(row,column){  
-  		if($scope.ticTacToe[row][column]!='X' && $scope.ticTacToe[row][column]!='O'){
+  		if($scope.game[$scope.gameId].ticTacToe[row][column]!='X' && $scope.game[$scope.gameId].ticTacToe[row][column]!='O'){
   				if(turn % 2 == 1) {
-  					$scope.ticTacToe[row][column]='X';
+  					$scope.game[$scope.gameId].ticTacToe[row][column]='X';
   					document.getElementById('x').innerHTML = p2Name+"'S";
   					
   				}
   				else{
-  					$scope.ticTacToe[row][column]='O';
+  					$scope.game[$scope.gameId].ticTacToe[row][column]='O';
   					document.getElementById('x').innerHTML = p1Name+"'S";
   				}
   				turn++
   			}
   			else{
-  				alert('Look. This... is all a mistake. I\'m just a compound interest program. I work at a savings and loan! I can\'t play these video games!')
+  				alert('Look. This... is all a mistake. I\'m just a compound interest program. I work at a savings and loan! I can\'t play these video game!')
   			}
   		}
 
 
   	$scope.check = function(row,column) {
   		// asign a unique value to each unique box name 
-  		var a = $scope.ticTacToe[0][0];
-  		var b = $scope.ticTacToe[0][1];
-  		var c = $scope.ticTacToe[0][2];
-  		var d = $scope.ticTacToe[1][0];
-  		var e = $scope.ticTacToe[1][1];
-  		var f = $scope.ticTacToe[1][2];
-  		var g = $scope.ticTacToe[2][0];
-  		var h = $scope.ticTacToe[2][1];
-  		var i = $scope.ticTacToe[2][2];
+  		var a = $scope.game[$scope.gameId].ticTacToe[0][0];
+  		var b = $scope.game[$scope.gameId].ticTacToe[0][1];
+  		var c = $scope.game[$scope.gameId].ticTacToe[0][2];
+  		var d = $scope.game[$scope.gameId].ticTacToe[1][0];
+  		var e = $scope.game[$scope.gameId].ticTacToe[1][1];
+  		var f = $scope.game[$scope.gameId].ticTacToe[1][2];
+  		var g = $scope.game[$scope.gameId].ticTacToe[2][0];
+  		var h = $scope.game[$scope.gameId].ticTacToe[2][1];
+  		var i = $scope.game[$scope.gameId].ticTacToe[2][2];
 
   		if(
   			(a=="X" && b=="X" && c=='X') 

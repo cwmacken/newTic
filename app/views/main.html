@@ -3,14 +3,10 @@
       <nav>
         <p class="header">TIC / TAC / TOE</p>
       </nav>
-      <!-- the action will adjust the URL... Saving for later -->
         <div class="mainBody">
           <div class="formContain">
             <div class="txtInptCenter">
               <input class="txtInpt frontPageText" id="p1" type="text" value="NAME PLEASE"/>
-              <!-- <input class="txtInpt frontPageText" id="p2" type="text" value="PLAYER 2"/> -->
-              
-              <!-- <input class="strBtn" type="submit" value="START"> -->
             </div>
             <p class="startText"><!-- P1; X's or O's? --></p>
             <div class="strBtnContain">
@@ -48,13 +44,15 @@
           </div>
       <div>
         <div id="GameContainer" ng-click="">
-          <div ng-repeat="row in ticTacToe">
-            <div ng-class="{sqr:true, borderTop:$parent.$index !=0, borderLeft:$index !=0}" ng-repeat="cell in row " ng-click="clickSqr($parent.$index, $index); check($parent.$index, $index)">{{ticTacToe[$parent.$index][$index]}}</div>
+          <div ng-repeat="row in game[gameId].ticTacToe">
+            <div ng-class="{sqr:true, borderTop:$parent.$index !=0, borderLeft:$index !=0}" ng-repeat="cell in row " ng-click="clickSqr($parent.$index, $index); check($parent.$index, $index)">{{cell}}</div>
               <div class="clearfix"></div>
             </div>
           </div>
         
       </div>
+
+
       <div class="indiContain">
             <div class="indicate" id="x"></div>
             <div class="indicate" id="o">TURN</div>
