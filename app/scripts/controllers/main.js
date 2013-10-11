@@ -23,9 +23,9 @@ angular.module('newTicApp')
 
           var newGame = {
             ticTacToe: [['','',''],['','',''],['','','']],
-            turn: 'p1'
-            // win: false,
-            // turnCount: 0
+            turn: 'p1',
+            win: false,
+            turnCount: 0
           };      
 
           $scope.gameId = $scope.game.push(newGame) - 1;
@@ -48,10 +48,7 @@ angular.module('newTicApp')
 
 		$scope.choose=function (f){
 		  turn = 1;
-		  drawFix=1;
 		  choice = f;
-   	  	  $scope.p1Pick ="O"
-	  	  $scope.p2Pick ="X"
 		  $scope.strGame();
 		};
 
@@ -72,19 +69,45 @@ angular.module('newTicApp')
 // game[gameId].ticTacToe
   	$scope.clickSqr = function(row,column){  
   		if($scope.game[$scope.gameId].ticTacToe[row][column]!='X' && $scope.game[$scope.gameId].ticTacToe[row][column]!='O'){
-  				if(turn % 2 == 1) {
-  					$scope.game[$scope.gameId].ticTacToe[row][column]='X';
-  					document.getElementById('x').innerHTML = p2Name+"'S";
-  					
-  				}
-  				else{
-  					$scope.game[$scope.gameId].ticTacToe[row][column]='O';
-  					document.getElementById('x').innerHTML = p1Name+"'S";
-  				}
-  				turn++
+  			 if ($scope.player =='p1'){
+              if($scope.game[$scope.gameId].turnCount % 2 == 1) {
+                console.log('not yo turn')
+              }
+              else{
+                
+                $scope.game[$scope.gameId].ticTacToe[row][column]='X';
+                $scope.game[$scope.gameId].turnCount++;
+                console.log($scope.game[$scope.gameId].turnCount);
+              }
+
+           }
+           else{
+              if($scope.game[$scope.gameId].turnCount % 2 == 1) {
+                $scope.game[$scope.gameId].ticTacToe[row][column]='O';
+                $scope.game[$scope.gameId].turnCount++;
+                console.log($scope.game[$scope.gameId].turnCount);                
+              }
+              else{
+                console.log('not yo turn')
+                  }
+
+           }
+
+
+          	// if(turn % 2 == 1) {
+    				// 	$scope.game[$scope.gameId].ticTacToe[row][column]='X';
+    				// 	document.getElementById('x').innerHTML = p2Name+"'S";
+    					
+    				// }
+    				// else{
+    				// 	$scope.game[$scope.gameId].ticTacToe[row][column]='O';
+    				// 	document.getElementById('x').innerHTML = p1Name+"'S";
+    				// }
+  				turn++;
+          $scope.check();
   			}
   			else{
-  				alert('Look. This... is all a mistake. I\'m just a compound interest program. I work at a savings and loan! I can\'t play these video game!')
+  				// alert('Look. This... is all a mistake. I\'m just a compound interest program. I work at a savings and loan! I can\'t play these video game!')
   			}
   		}
 
@@ -106,12 +129,12 @@ angular.module('newTicApp')
   				|| 
   			(d=="X" && e=="X" && f=='X')
   				|| 
-  		  	(g=="X" && h=="X" && i=='X')
-  		  		||
-  		  	(a=="X" && d=="X" && g=='X') 	
-  		  		|| 
-  		  	(b=="X" && e=="X" && h=='X')
-  		  		|| 
+  		  (g=="X" && h=="X" && i=='X')
+  		  	||
+  		  (a=="X" && d=="X" && g=='X') 	
+  		  	|| 
+  		  (b=="X" && e=="X" && h=='X')
+  		  	|| 
   			(c=="X" && f=="X" && i=='X') 
   				||
   			(a=="X" && e=="X" && i=='X') 
@@ -119,13 +142,13 @@ angular.module('newTicApp')
   			(c=="X" && e=="X" && g=='X')){
 
   					document.getElementsByClassName('alertText')[0].innerHTML = p1Name+" WINS!!!";
-  					console.log($scope.ticTacToe);
-  			  		document.getElementById('x').innerHTML = "";
-  		  			document.getElementById('o').innerHTML = "";
-  		  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
-  		  			
-  		  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
+  			  	document.getElementById('x').innerHTML = "";
+  		  		document.getElementById('o').innerHTML = "";
+  		  		document.getElementsByClassName('alertBox')[0].style.display = "inline";
   		  			// NEED TO SET THE RESET CODE     setTimeout("theResetBtn();",3000);
+            $scope.game[$scope.gameId].win=true;
+            console.log($scope.game[$scope.gameId].win)
+
   			  	}
 
   		 else if(
@@ -133,12 +156,12 @@ angular.module('newTicApp')
   				|| 
   			(d=="O" && e=="O" && f=='O')
   				|| 
-  		  	(g=="O" && h=="O" && i=='O')
-  		  		||
-  		  	(a=="O" && d=="O" && g=='O') 	
-  		  		|| 
-  		  	(b=="O" && e=="O" && h=='O')
-  		  		|| 
+	      (g=="O" && h=="O" && i=='O')
+  		  	||
+		  	(a=="O" && d=="O" && g=='O') 	
+  		  	|| 
+		  	(b=="O" && e=="O" && h=='O')
+  		  	|| 
   			(c=="O" && f=="O" && i=='O') 
   				||
   			(a=="O" && e=="O" && i=='O') 
@@ -146,25 +169,23 @@ angular.module('newTicApp')
   			(c=="O" && e=="O" && g=='O')){
 
   					document.getElementsByClassName('alertText')[0].innerHTML = p2Name+" WINS!!!";
-  					console.log("O win - " + $scope.ticTacToe);
-  			  		document.getElementById('x').innerHTML = "";
-  		  			document.getElementById('o').innerHTML = "";
-  		  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
-  		  			
-  		  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
+  			    document.getElementById('x').innerHTML = "";
+  		  		document.getElementById('o').innerHTML = "";
+  		  		document.getElementsByClassName('alertBox')[0].style.display = "inline";
+            $scope.game[$scope.gameId].win=true;
   		  			// NEED TO SET THE RESET CODE     setTimeout("theResetBtn();",3000);
+            console.log($scope.game[$scope.gameId].win)
   			  	}
 
   		 else{
 
-  		 	if(turn==10 && drawFix==1){
+  		 	if($scope.game[$scope.gameId].turnCount==9){
   		 		
   		 		document.getElementById('x').innerHTML = "";
   	  			document.getElementById('o').innerHTML = "";
   	  			document.getElementsByClassName('alertBox')[0].style.display = "inline";
   	  			document.getElementsByClassName('alertText')[0].innerHTML = "DRAW...";
   	  			// NEED TO SET THE RESET CODE     setTimeout("theResetBtn();",3000);
-  	  			$scope.ticTacToe= [['','',''],['','',''],['','','']];
   		 	}
   		 }
   	}
@@ -183,7 +204,6 @@ angular.module('newTicApp')
         	document.getElementById('x').innerHTML = p1Name+'\'S';
         	$scope.ticTacToe= [['','',''],['','',''],['','','']];
         	turn = 1;	
-	  		drawFix=1;
 	  		$scope.p1Pick ="O"
 	  		$scope.p2Pick ="X"	
     };

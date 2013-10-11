@@ -45,7 +45,7 @@
       <div>
         <div id="GameContainer" ng-click="">
           <div ng-repeat="row in game[gameId].ticTacToe">
-            <div ng-class="{sqr:true, borderTop:$parent.$index !=0, borderLeft:$index !=0}" ng-repeat="cell in row " ng-click="clickSqr($parent.$index, $index); check($parent.$index, $index)">{{cell}}</div>
+            <div ng-class="{sqr:true, borderTop:$parent.$index !=0, borderLeft:$index !=0}" ng-repeat="cell in row " ng-click="clickSqr($parent.$index, $index)">{{cell}}</div>
               <div class="clearfix"></div>
             </div>
           </div>
