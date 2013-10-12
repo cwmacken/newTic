@@ -23,7 +23,7 @@ angular.module('newTicApp')
 
           var newGame = {
             ticTacToe: [['','',''],['','',''],['','','']],
-            turn: 'p1',
+            turn: 'X',
             win: false,
             turnCount: 0
           };      
@@ -54,13 +54,13 @@ angular.module('newTicApp')
 		$scope.strGame=function(){
 		  document.getElementById('game').style.display="inline";
 		  document.getElementById('startPage').style.display="none";
-		  var p1Hold = document.getElementById('p1').value;
+		  // var p1Hold = document.getElementById('p1').value;
 		  // var p2Hold = document.getElementById('p2').value;
-		  document.getElementById('x').innerHTML = (p1Hold.toUpperCase())+'\'S';
-		  p1Name = p1Hold.toUpperCase();
+		  document.getElementById('x').innerHTML = ($scope.game[$scope.gameId].turn)+'\'S';
+		  // p1Name = p1Hold.toUpperCase();
 		  // p2Name = p2Hold.toUpperCase();
-		  return p1Name, 
-      p2Name
+		  // return p1Name, 
+    //   p2Name
       ;
 		}
 
@@ -76,6 +76,8 @@ angular.module('newTicApp')
                 
                 $scope.game[$scope.gameId].ticTacToe[row][column]='X';
                 $scope.game[$scope.gameId].turnCount++;
+                $scope.game[$scope.gameId].turn="O"
+                document.getElementById('x').innerHTML = ($scope.game[$scope.gameId].turn)+'\'S';
                 console.log($scope.game[$scope.gameId].turnCount);
               }
 
@@ -84,6 +86,8 @@ angular.module('newTicApp')
               if($scope.game[$scope.gameId].turnCount % 2 == 1) {
                 $scope.game[$scope.gameId].ticTacToe[row][column]='O';
                 $scope.game[$scope.gameId].turnCount++;
+                $scope.game[$scope.gameId].turn="X"
+                document.getElementById('x').innerHTML = ($scope.game[$scope.gameId].turn)+'\'S';
                 console.log($scope.game[$scope.gameId].turnCount);                
               }
               else{
@@ -140,12 +144,13 @@ angular.module('newTicApp')
   				|| 
   			(c=="X" && e=="X" && g=='X')){
 
-  					document.getElementsByClassName('alertText')[0].innerHTML = p1Name+" WINS!!!";
-  			  	document.getElementById('x').innerHTML = "";
-  		  		document.getElementById('o').innerHTML = "";
-  		  		document.getElementsByClassName('alertBox')[0].style.display = "inline";
-  		  			// NEED TO SET THE RESET CODE     setTimeout("theResetBtn();",3000);
+            document.getElementsByClassName('alertText')[0].innerHTML =" X WINS!!!";
+            document.getElementById('x').innerHTML = "";
+            document.getElementById('o').innerHTML = "";
+            document.getElementsByClassName('alertBox')[0].style.display = "inline";
             $scope.game[$scope.gameId].win=true;
+
+  		  			// NEED TO SET THE RESET CODE     setTimeout("theResetBtn();",3000);
             console.log($scope.game[$scope.gameId].win)
 
   			  	}
@@ -167,11 +172,11 @@ angular.module('newTicApp')
   				|| 
   			(c=="O" && e=="O" && g=='O')){
 
-  					document.getElementsByClassName('alertText')[0].innerHTML = p2Name+" WINS!!!";
+            $scope.game[$scope.gameId].win=true;
+  					document.getElementsByClassName('alertText')[0].innerHTML =" O WINS!!!";
   			    document.getElementById('x').innerHTML = "";
   		  		document.getElementById('o').innerHTML = "";
   		  		document.getElementsByClassName('alertBox')[0].style.display = "inline";
-            $scope.game[$scope.gameId].win=true;
   		  			// NEED TO SET THE RESET CODE     setTimeout("theResetBtn();",3000);
             console.log($scope.game[$scope.gameId].win)
   			  	}

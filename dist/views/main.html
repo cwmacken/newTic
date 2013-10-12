@@ -5,10 +5,10 @@
       </nav>
         <div class="mainBody">
           <div class="formContain">
-            <div class="txtInptCenter">
-              <input class="txtInpt frontPageText" id="p1" type="text" value="NAME PLEASE">
-            </div>
-            <p class="startText"></p>
+            <!-- <div class="txtInptCenter">
+              <input class="txtInpt frontPageText" id="p1" type="text" value="NAME PLEASE"/>
+            </div> -->
+         <!--    <p class="startText"></p> -->
             <div class="strBtnContain">
               <button class="strBtn frontPageText" ng-click="choose(1)"> START GAME</button>
             </div>
@@ -24,7 +24,7 @@
               HOME
             </button>
       </nav>
-        <div class="alertBox">
+        <div ng-show="game[gameId].win" class="alertBox">
             <div class="alert">
                 <div class="alertText">
                   WINNER
