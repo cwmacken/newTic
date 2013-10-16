@@ -199,7 +199,8 @@ angular.module('newTicApp')
 	      	document.getElementById('game').style.display="none";
 	      	document.getElementById('startPage').style.display="inline";
 	      	$scope.ticTacToe= [['','',''],['','',''],['','','']];
-	      		
+          $scope.game = [];
+          $scope.queue = {};
 		}
 
 		$scope.theResetBtn=function(){
